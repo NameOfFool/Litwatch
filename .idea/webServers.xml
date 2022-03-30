@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f90a373b-5c47-4768-9635-a659606aff2a" name="server" url="http://localhost/Litwatch">
+        <fileTransfer mountedRoot="C:\OpenServer\domains\localhost\Litwatch" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
