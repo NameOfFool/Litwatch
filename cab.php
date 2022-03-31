@@ -6,7 +6,7 @@ $tel = $_SESSION['tel'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 require_once 'DBConn.php';
-$videos="<div>";
+$videos="<div class='videos'>";
 $query="Select * from videos inner join users on users.Код_пользователя=videos.Код_автора where Имя_пользователя='".$n."'";
 $result=$conn->query($query);
 if(!$result)
@@ -17,7 +17,10 @@ if(!$result)
 for($i=0;$i<$result->num_rows;$i++){
     $row=$result->fetch_array();
     $video_name=$row['Название'];
-    $videos.="<img src='previews/".$video_name.".jpg'>\n";
+    $videos.="<div class='video'>
+            <a href='#'><img src='previews/".$video_name.".jpg' alt='Стивен Кинг'></a>
+    <a href='#'><p>".$video_name."</p></a>
+        </div>";
 }
 $videos.="</div>";
 echo'
@@ -42,10 +45,8 @@ echo'
     <p>Почта пользователя:'.$email.'</p>
     <button onclick="document.location.href=\'VideoEditor.php\'">Добавить видео</button>
     <button onclick="document.location.href=\'main.php?exit=true\'">Выйти из аккаунта</button>
+    '.$videos.'
 </div>
-    <div>
-'.$videos.'
-    </div>
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
