@@ -35,7 +35,7 @@ echo'
 </header>
 <main>
     <nav>
-        <a>Главная</a>
+        <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
         '.$name.'
     </nav>

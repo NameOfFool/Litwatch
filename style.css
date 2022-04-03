@@ -114,3 +114,11 @@ div.field input[type=submit],div.field input[type=button]{
     background-color: #ecd6bf;
     font-weight: bold;
 }
+.player{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.player video{
+    width: 75%;
+}
