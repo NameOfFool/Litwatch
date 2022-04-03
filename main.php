@@ -12,7 +12,22 @@ if(isset($_SESSION['name'])) {
         $email = $_SESSION['email'];
         $password = $_SESSION['password'];
     }
+
 }
+require_once "DBConn.php";
+$query = "Select * from videos";
+$result= $conn->query($query);
+$videos="<div class='videos'>";
+for($i=0;$i<$result->num_rows;$i++){
+    $row=$result->fetch_array();
+    $video_name=$row['Название'];
+    $code=$row['Код_видео'];
+    $videos.="<div class='video'>
+            <a href='#'><img src='previews/".$video_name.".jpg' alt='Стивен Кинг'></a>
+    <a href='#'><p>".$video_name."</p></a>
+        </div>";
+}
+$videos.="</div>";
 echo'
 <!DOCTYPE html>
 <html lang="ru">
@@ -32,20 +47,7 @@ echo'
         <a href="#">Понравившиеся</a>
         '.$name.'
     </nav>
-    <div class="videos">
-        <div class="video">
-            <a href="#"><img src="images/prev.jpg" alt="Стивен Кинг"></a>
-            <a href="#"><p>Аудиокнига "Стивен Кинг Девочка, которая любила Тома Гордона". Читает Владимир Кн...</p></a>
-        </div>
-        <div class="video">
-            <a href="#"><img src="images/prev.jpg" alt="Стивен Кинг"></a>
-            <a href="#"><p>Аудиокнига "Стивен Кинг Девочка, которая любила Тома Гордона". Читает Владимир Кн...</p></a>
-        </div>
-        <div class="video">
-            <a href="#"><img src="images/prev.jpg" alt="Стивен Кинг"></a>
-            <a href="#"><p>Аудиокнига "Стивен Кинг Девочка, которая любила Тома Гордона". Читает Владимир Кн...</p></a>
-        </div>
-    </div>
+    '.$videos.'
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
