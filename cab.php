@@ -17,9 +17,10 @@ if(!$result)
 for($i=0;$i<$result->num_rows;$i++){
     $row=$result->fetch_array();
     $video_name=$row['Название'];
+     $code=$row['Код_видео'];
     $videos.="<div class='video'>
-            <a href='#'><img src='previews/".$video_name.".jpg' alt='Стивен Кинг'></a>
-    <a href='#'><p>".$video_name."</p></a>
+            <a href='watch.php?v=".$code."'><img src='previews/".$video_name.".jpg' alt='Стивен Кинг'></a>
+    <a href='watch.php?v=".$code."'><p>".$video_name."</p></a>
         </div>";
 }
 $videos.="</div>";

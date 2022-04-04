@@ -14,12 +14,13 @@ if(isset($_SESSION['name'])) {
     }
 }
 require_once "DBConn.php";
-$query = "Select * from videos";
+$code=$_GET['v'];
+$query = "Select * from videos where Код_видео=".$code;
 $result= $conn->query($query);
 $row=$result->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
-$date=$row['дата-публикации'];
+$date=$row['Дата_публикации'];
 echo '<!DOCTYPE html>
 <html lang="ru">
 <head>
