@@ -15,6 +15,7 @@ if(isset($_SESSION['name'])) {
 
 }
 require_once "DBConn.php";
+$conn=DBConn();
 $query = "Select * from videos";
 $result= $conn->query($query);
 $videos="<div class='videos'>";

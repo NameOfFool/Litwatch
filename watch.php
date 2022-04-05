@@ -14,6 +14,7 @@ if(isset($_SESSION['name'])) {
     }
 }
 require_once "DBConn.php";
+$conn=DBConn();
 $code=$_GET['v'];
 $query = "Select * from videos where Код_видео=".$code;
 $result= $conn->query($query);
@@ -27,6 +28,7 @@ echo '<!DOCTYPE html>
     <meta charset="UTF-8">
     <title>'.$video_name.'</title>
     <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.6.0.js"></script>
 </head>
 <body>
 <header>
@@ -42,10 +44,16 @@ echo '<!DOCTYPE html>
     <video autoplay controls src="videos/'.$video_name.'.mp4"></video>
     <div class="desc">
         <b>Дата публикации:'.$date.'</b><br>
-        '.$desc.'
+        '.$desc.'<br>
+        <button>Нравится</button>
     </div>
 </div>
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
+<script type="text/javascript">
+    $(document).on("click","button",function (){
+        
+    })
+</script>
 </html>';

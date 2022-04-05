@@ -49,6 +49,7 @@ function GetForm()
 }
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 require_once 'DBConn.php';
+    $conn=DBConn();
 $name=$_POST['name'];
 $tel=$_POST['tel'];
 $email=$_POST['email'];

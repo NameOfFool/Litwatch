@@ -7,6 +7,7 @@ $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 $s = $_SERVER["PHP_SELF"];
 require_once 'DBConn.php';
+$conn=DBConn();
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
     $video_name=$_POST['video_name'];

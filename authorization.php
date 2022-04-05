@@ -39,6 +39,7 @@ function GetForm()
 }
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     require_once 'DBConn.php';
+    $conn=DBConn();
     $email=$_POST['email'];
     $password=$_POST['password'];
     $query = "select * from users where Почта='$email' and Пароль='$password'";
