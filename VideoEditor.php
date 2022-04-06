@@ -5,34 +5,9 @@ $name = '<a href="cab.php">'.$n.'</a>';
 $tel = $_SESSION['tel'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
-$s = $_SERVER["PHP_SELF"];
+$s = 'AddVideo.php';
 require_once 'DBConn.php';
 $conn=DBConn();
-if($_SERVER['REQUEST_METHOD']=='POST')
-{
-    $video_name=$_POST['video_name'];
-    $desc= $_POST['desc'];
-    $video=$_FILES['video']['tmp_name'];
-    $preview=$_FILES['preview']['tmp_name'];
-    move_uploaded_file($preview,$_SERVER['DOCUMENT_ROOT'].'/Litwatch/previews/'.$video_name.'.jpg');
-    echo $preview.' '.$_SERVER['DOCUMENT_ROOT'].'/Litwatch/previews/'.$_FILES['preview']['name'];
-    move_uploaded_file($video,$_SERVER['DOCUMENT_ROOT'].'/Litwatch/videos/'.$video_name.'.mp4');
-    $query = "insert into videos (`Код_автора`, `Название`, `Описание`, `Дата_публикации`) values 
-                                                                                    ((select Код_пользователя from users where Имя_Пользователя = '".$n."'),
-                                                                                     '$video_name','$desc','".date('y-m-d')."')";
-    $result = $conn->query($query);
-    if(!$result){
-        die("insert into videos (`Код_автора`, `Название`, `Описание`, `Дата_публикации`) values 
-                                                                                    ((select Код_пользователя from users where Имя_Пользователя = '".$name."'),
-                                                                                     '$video_name','$desc','".date('y-m-d')."')".$conn->error);
-    }
-    else
-        header("Location:cab.php");
-    $row=$result->fetch_array();
-    echo "<br>select `Код_пользователя` from `users` where `Имя_Пользователя` = '".$n."'";
-    print_r($row);
-}
-else
     echo '<html>
 <head>
     <title>Авторизация</title>
@@ -46,9 +21,9 @@ else
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-        '.$name.'
+        ' .$name. '
     </nav>
-    <form method="POST" action=" '.$s.' " lang="en" enctype="multipart/form-data">
+    <form method="POST" action=" ' .$s. ' " enctype="multipart/form-data">
         <div class="field">
             <label for="video_name">Название видео</label>
             <input type="text" name="video_name" required>
@@ -65,9 +40,8 @@ else
             <label for="preview">Превью</label>
             <input type="file" name="preview" accept="image/*" required>
         </div>
-        </div>
         <div class="field">
-            <label><input type="submit"></label>
+            <label></label><input type="submit">
         </div>
     </form>
 </main>

@@ -31,8 +31,8 @@ if(isset($_SESSION['name'])) {
 }
 $query = "Select * from videos where Код_видео=".$code;
 $result= $conn->query($query);
-$statQuery="select ifnull(Лайки,0)Лайки, ifnull(Дизлайки,0)Дизлайки from (SELECT (SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=1 group by `Код_видео` having Код_видео=2 )Лайки,
-(SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=0 group by `Код_видео` having Код_видео=2)Дизлайки)t;";
+$statQuery="select ifnull(Лайки,0)Лайки, ifnull(Дизлайки,0)Дизлайки from (SELECT (SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=1 group by `Код_видео` having Код_видео=$code )Лайки,
+(SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=0 group by `Код_видео` having Код_видео=$code)Дизлайки)t;";
 $row=$result->fetch_array();
 $stat=$conn->query($statQuery);
 $likedis=$stat->fetch_array();
