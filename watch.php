@@ -42,7 +42,8 @@ echo '<!DOCTYPE html>
     <video autoplay controls src="videos/'.$video_name.'.mp4"></video>
     <div class="desc">
         <b>Дата публикации:'.$date.'</b><br>
-        '.$desc.'
+        '.$desc.'<br>
+        <button onclick="location.href=\'#\'">Нравится</button><button>Не нравится</button>
     </div>
 </div>
 </main>
