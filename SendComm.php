@@ -1,5 +1,5 @@
 <?php
-require_once "DBConn.php";
+include "DBConn.php";
 $conn=DBConn();
 $user=$_POST['user'];
 $video=$_POST['video'];

@@ -5,7 +5,7 @@ $name = '<a href="cab.php">'.$n.'</a>';
 $tel = $_SESSION['tel'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
-require_once 'DBConn.php';
+include "DBConn.php";
 $conn=DBConn();
 $videos="<div class='videos'>";
 $query="Select * from videos inner join users on users.Код_пользователя=videos.Код_автора where Имя_пользователя='".$n."'";

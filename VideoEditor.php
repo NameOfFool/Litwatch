@@ -6,7 +6,7 @@ $tel = $_SESSION['tel'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 $s = 'AddVideo.php';
-require_once 'DBConn.php';
+include "DBConn.php";
 $conn=DBConn();
     echo '<html>
 <head>
