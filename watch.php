@@ -1,5 +1,5 @@
 <?php
-require_once "DBConn.php";
+include "DBConn.php";
 $conn=DBConn();
 session_start();
 $name='<a id="cab" href="authorization.php">Войти</a>';

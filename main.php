@@ -11,10 +11,10 @@ if(isset($_SESSION['name'])) {
         $tel = $_SESSION['tel'];
         $email = $_SESSION['email'];
         $password = $_SESSION['password'];
-    }
 
+    }
 }
-require_once "DBConn.php";
+include "DBConn.php";
 $conn=DBConn();
 $query = "Select * from videos";
 $result= $conn->query($query);

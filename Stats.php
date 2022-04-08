@@ -1,5 +1,5 @@
 <?php
-require_once "DBConn.php";
+include "DBConn.php";
 $conn=DBConn();
 $exists=$_GET['exists']=='true'?true:false;
 $x=$_GET['x']=='true'?1:0;
