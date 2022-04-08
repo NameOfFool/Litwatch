@@ -8,7 +8,8 @@ $password = $_SESSION['password'];
 $s = 'AddVideo.php';
 require_once 'DBConn.php';
 $conn=DBConn();
-    echo '<html>
+?>
+<html>
 <head>
     <title>Авторизация</title>
     <link rel="stylesheet" href="style.css"
@@ -21,9 +22,9 @@ $conn=DBConn();
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-        ' .$name. '
+        <?=$name?>
     </nav>
-    <form method="POST" action=" ' .$s. ' " enctype="multipart/form-data">
+    <form method="POST" action=" <?=$s?> " enctype="multipart/form-data">
         <div class="field">
             <label for="video_name">Название видео</label>
             <input type="text" name="video_name" required>
@@ -47,4 +48,4 @@ $conn=DBConn();
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
-</html>';
+</html>

@@ -1,42 +1,5 @@
 <?php
-function GetForm()
-{
     $s = $_SERVER["PHP_SELF"];
-    echo'
-<html>
-    <head>
-        <title>Авторизация</title>
-        <link rel="stylesheet" href="style.css"
-    </head>
-    <body>
-    <header>
-        <img src="images/logo.png" class="logo" alt="Главная страница">
-    </header>
-    <main>
-        <nav>
-            <a href="main.php">Главная</a>
-            <a href="#">Понравившиеся</a>
-            <a>Войти</a>
-        </nav>
-        <form method="POST" action=" '.$s.' " lang="en">
-            <div class="field">
-                <label for="email">Почта</label>
-                <input type="email" name="email" required>
-            </div>
-            <div class="field">
-                <label for="password">Пароль</label>
-                <input type="password" name="password" required>
-            </div>
-            <div class="field">
-                <label><input type="submit"></label>
-                 <input type="button" value="Регистрация" onclick="document.location.href=\'registration.php\'">
-            </div>
-        </form>
-    </main>
-    <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
-    </body>
-</html>';
-}
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     require_once 'DBConn.php';
     $conn=DBConn();
@@ -59,7 +22,38 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         Header("Location: main.php");
     }
 }
-else{
-GetForm();
-}
+?>
+<html>
+    <head>
+        <title>Авторизация</title>
+        <link rel="stylesheet" href="style.css"
+    </head>
+    <body>
+    <header>
+        <img src="images/logo.png" class="logo" alt="Главная страница">
+    </header>
+    <main>
+        <nav>
+            <a href="main.php">Главная</a>
+            <a href="#">Понравившиеся</a>
+            <a>Войти</a>
+        </nav>
+        <form method="POST" action=" <?=$s?> " lang="en">
+            <div class="field">
+                <label for="email">Почта</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="field">
+                <label for="password">Пароль</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="field">
+                <label><input type="submit"></label>
+                 <input type="button" value="Регистрация" onclick="document.location.href='registration.php'">
+            </div>
+        </form>
+    </main>
+    <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+    </body>
+</html>
 

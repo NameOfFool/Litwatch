@@ -1,8 +1,29 @@
 <?php
-function GetForm()
-{
-    $s = $_SERVER["PHP_SELF"];
-    echo'<html>
+$s = $_SERVER["PHP_SELF"];
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+require_once 'DBConn.php';
+    $conn=DBConn();
+$name=$_POST['name'];
+$tel=$_POST['tel'];
+$email=$_POST['email'];
+$password=$_POST['password'];
+$conf_password=$_POST['password_confirm'];
+$query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
+$result=$conn->query($query);
+if(!$result){
+die("insert into users values(null, '$name', '$tel', '$email','$password',0)");
+}
+else{
+session_start();
+$_SESSION['name']=$_POST['name'];
+$_SESSION['tel']=$_POST['tel'];
+$_SESSION['email']= $_POST['email'];
+$_SESSION['password']=$_POST['password'];
+Header("Location: main.php");
+}
+}
+?>
+<html>
 <head>
     <title>Авторизация</title>
     <link rel="stylesheet" href="style.css"
@@ -17,7 +38,7 @@ function GetForm()
         <a href="#">Понравившиеся</a>
         <a>Войти</a>
     </nav>
-    <form method="POST" action=" '.$s.' " lang="en">
+    <form method="POST" action=" <?=$s?> " lang="en">
         <div class="field">
             <label for="name">Имя Пользователя</label>
             <input type="text" name="name" required>
@@ -45,30 +66,4 @@ function GetForm()
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
-</html>';
-}
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-require_once 'DBConn.php';
-    $conn=DBConn();
-$name=$_POST['name'];
-$tel=$_POST['tel'];
-$email=$_POST['email'];
-$password=$_POST['password'];
-$conf_password=$_POST['password_confirm'];
-$query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
-$result=$conn->query($query);
-if(!$result){
-die("insert into users values(null, '$name', '$tel', '$email','$password',0)");
-}
-else{
-session_start();
-$_SESSION['name']=$_POST['name'];
-$_SESSION['tel']=$_POST['tel'];
-$_SESSION['email']= $_POST['email'];
-$_SESSION['password']=$_POST['password'];
-Header("Location: main.php");
-}
-}
-else{
-GetForm();
-}
+</html>

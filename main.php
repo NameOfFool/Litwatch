@@ -29,7 +29,7 @@ for($i=0;$i<$result->num_rows;$i++){
         </div>";
 }
 $videos.="</div>";
-echo'
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -46,10 +46,10 @@ echo'
     <nav>
         <a>Главная</a>
         <a href="#">Понравившиеся</a>
-        '.$name.'
+        <?=$name?>
     </nav>
-    '.$videos.'
+    <?=$videos?>
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
-</html>';
+</html>

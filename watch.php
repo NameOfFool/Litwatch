@@ -2,7 +2,7 @@
 require_once "DBConn.php";
 $conn=DBConn();
 session_start();
-$name='<a href="authorization.php">Войти</a>';
+$name='<a id="cab" href="authorization.php">Войти</a>';
 $code=$_GET['v'];
 if(isset($_SESSION['name'])) {
     if(isset($_GET['exit'])){
@@ -10,7 +10,7 @@ if(isset($_SESSION['name'])) {
     }
     else {
         $n = $_SESSION["name"];
-        $name = '<a href="cab.php">' . $n . '</a>';
+        $name = '<a id="cab" href="cab.php">' . $n . '</a>';
         $tel = $_SESSION['tel'];
         $email = $_SESSION['email'];
         $password = $_SESSION['password'];
@@ -39,7 +39,8 @@ $likedis=$stat->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
 $date=$row['Дата_публикации'];
-echo '<!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -55,15 +56,15 @@ echo '<!DOCTYPE html>
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-        '.$name.'
+        <?=$name?>
     </nav>
     <div class="player">
-    <video autoplay controls src="videos/'.$video_name.'.mp4"></video>
+    <video autoplay controls src="videos/<?=$video_name?>.mp4"></video>
     <div class="desc">
-        <b>Дата публикации:'.$date.'</b><br>
-        '.$desc.'<br>
-        <button style="background-color:'.$color1.'" id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     '.$likedis[0].'</span>
-        <button style="background-color:'.$color2.'" id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises">  '.$likedis[1].'</span>
+        <b>Дата публикации:<?=$date?></b><br>
+<?=$desc?><br>
+        <button style="background-color:<?=$color1?>" id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     <?=$likedis[0]?></span>
+        <button style="background-color:<?=$color2?>" id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises">  <?=$likedis[1]?></span>
     </div>
     <div>
         <textarea id="new" placeholder="Ваш комментарий"></textarea>
@@ -74,15 +75,15 @@ echo '<!DOCTYPE html>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
 <script type="text/javascript">
-let l='.$likedis[0].';
-let d='.$likedis[1].';
+let l=<?=$likedis[0]?>;
+let d=<?=$likedis[1]?>;
     function SendMark(x){
-        if(\'<a href="authorization.php">Войти</a>\'==\''.$name.'\'){
+        if(document.getElementById("cab").innerHTML=="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
         else{
-        var exists=true
-        var stat=[document.getElementById("like").style.backgroundColor,document.getElementById("dis").style.backgroundColor]
+        let exists=true
+        let stat=[document.getElementById("like").style.backgroundColor,document.getElementById("dis").style.backgroundColor]
         if(stat[0]=="grey" && stat[1]=="grey"){
             exists=false
         }
@@ -105,24 +106,24 @@ let d='.$likedis[1].';
         document.getElementById("dis").style.backgroundColor=stat[1]
       //  location.href="Stats.php?x="+x+"&exists="+exists+"&user='.$n.'&video='.$code.'"
         $.ajax({
-            url:\'Stats.php\',
-            type:\'GET\',
-            data:{x:x,exists:exists,user:"'.$n.'",video:'.$code.'}
+            url:'Stats.php',
+            type:'GET',
+            data:{x:x,exists:exists,user:"<?=$n?>",video:<?=$code?>}
             })
         }
     }
     function SendComm(){
-       if(\'<a href="authorization.php">Войти</a>\'==\''.$name.'\'){
+       if(document.getElementById("id").innerHTML=="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
         else{
-            var komm=document.getElementById("new").value;
+            let komm=document.getElementById("new").value;
             $.ajax({
-                url:\'SendComm.php\',
-                type:\'POST\',
-                data:{user:"'.$n.'",video:'.$code.',komm:komm}
+                url:'SendComm.php',
+                type:'POST',
+                data:{user:"<?=$n?>",video:<?=$code?>,komm:komm}
                 })
         } 
     }
 </script>
-</html>';
+</html>

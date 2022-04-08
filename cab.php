@@ -25,7 +25,7 @@ for($i=0;$i<$result->num_rows;$i++){
         </div>";
 }
 $videos.="</div>";
-echo'
+?>
 <html>
 <head>
     <title>Личная страница</title>
@@ -39,17 +39,17 @@ echo'
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-        '.$name.'
+       <?=$name?>
     </nav>
-    <div class="info" align="center">
-    <p>Имя пользователя:'.$name.'</p>
-    <p>Телефон пользователя:'.$tel.'</p>
-    <p>Почта пользователя:'.$email.'</p>
-    <button onclick="document.location.href=\'VideoEditor.php\'">Добавить видео</button>
-    <button onclick="document.location.href=\'main.php?exit=true\'">Выйти из аккаунта</button>
-    '.$videos.'
+    <div class="info">
+    <p>Имя пользователя:<?=$name?></p>
+    <p>Телефон пользователя:<?=$tel?></p>
+    <p>Почта пользователя:<?=$email?></p>
+    <button onclick="document.location.href='VideoEditor.php'">Добавить видео</button>
+    <button onclick="document.location.href='main.php?exit=true'">Выйти из аккаунта</button>
+<?=$videos?>
 </div>
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
 </body>
-</html>';
+</html>
