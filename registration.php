@@ -16,9 +16,6 @@ die("insert into users values(null, '$name', '$tel', '$email','$password',0)");
 else{
 session_start();
 $_SESSION['name']=$_POST['name'];
-$_SESSION['tel']=$_POST['tel'];
-$_SESSION['email']= $_POST['email'];
-$_SESSION['password']=$_POST['password'];
 Header("Location: main.php");
 }
 }

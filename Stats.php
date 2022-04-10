@@ -1,7 +1,7 @@
 <?php
 include "DBConn.php";
 $conn=DBConn();
-$exists=$_GET['exists']=='true'?true:false;
+$exists=$_GET['exists']=='true';
 $x=$_GET['x']=='true'?1:0;
 $user=$_GET['user'];
 $video=$_GET['video'];

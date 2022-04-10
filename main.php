@@ -8,10 +8,6 @@ if(isset($_SESSION['name'])) {
     else {
         $n = $_SESSION["name"];
         $name = '<a href="cab.php">' . $n . '</a>';
-        $tel = $_SESSION['tel'];
-        $email = $_SESSION['email'];
-        $password = $_SESSION['password'];
-
     }
 }
 include "DBConn.php";

@@ -39,13 +39,23 @@ $likedis=$stat->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
 $date=$row['Дата_публикации'];
+$commentQuery="SELECT * from komments inner join Users on Код_автора=Код_пользователя";
+$commentsResult=$conn->query($commentQuery);
+$comments="";
+while($row=$commentsResult->fetch_array()){
+    $comments.='<div class="comment">
+                <p>Автор:'.$row['Имя_пользователя'].'</p>
+                <blockquote>'.$row['Содержание'].'</blockquote>
+            </div>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>'.$video_name.'</title>
+    <title><?=$video_name?></title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="WatchStyle.css">
     <script src="jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -62,14 +72,17 @@ $date=$row['Дата_публикации'];
     <video autoplay controls src="videos/<?=$video_name?>.mp4"></video>
     <div class="desc">
         <b>Дата публикации:<?=$date?></b><br>
-<?=$desc?><br>
-        <button style="background-color:<?=$color1?>" id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     <?=$likedis[0]?></span>
-        <button style="background-color:<?=$color2?>" id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises">  <?=$likedis[1]?></span>
+<b>Описание:</b><?=$desc?><br>
+        <button  id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     <?=$likedis[0]?></span>
+        <button  id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises">  <?=$likedis[1]?></span>
     </div>
     <div>
         <textarea id="new" placeholder="Ваш комментарий"></textarea>
         <button onclick="SendComm()">Отправить</button>
     </div>
+        <div class="comments">
+            <?=$comments?>
+        </div>
 </div>
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
@@ -77,33 +90,41 @@ $date=$row['Дата_публикации'];
 <script type="text/javascript">
 let l=<?=$likedis[0]?>;
 let d=<?=$likedis[1]?>;
+document.getElementById("like").style.color="<?=$color1?>";
+document.getElementById("dis").style.color="<?=$color2?>";
     function SendMark(x){
         if(document.getElementById("cab").innerHTML=="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
         else{
         let exists=true
-        let stat=[document.getElementById("like").style.backgroundColor,document.getElementById("dis").style.backgroundColor]
+        let stat=[document.getElementById("like").style.color,document.getElementById("dis").style.color]
         if(stat[0]=="grey" && stat[1]=="grey"){
             exists=false
         }
         if(x){
-            stat[1]="grey"
-            stat[0]="white"
-            l+=1
-            d-=1
+            if(stat[0]!="white") {
+                l += 1
+                if (d != 0)
+                    d -= 1
+                stat[1] = "grey"
+                stat[0] = "white"
+            }
             
         }
         else{
-            stat[1]="white"
-            stat[0]="grey"
-            l-=1
-            d+=1
+            if(stat[1]!="white") {
+                if (l != 0)
+                    l -= 1
+                d += 1
+                stat[1] = "white"
+                stat[0] = "grey"
+            }
         }
         document.getElementById("likes").innerHTML=l+"";
         document.getElementById("dises").innerHTML=d+"";
-        document.getElementById("like").style.backgroundColor=stat[0]
-        document.getElementById("dis").style.backgroundColor=stat[1]
+        document.getElementById("like").style.color=stat[0]
+        document.getElementById("dis").style.color=stat[1]
       //  location.href="Stats.php?x="+x+"&exists="+exists+"&user='.$n.'&video='.$code.'"
         $.ajax({
             url:'Stats.php',
@@ -113,15 +134,15 @@ let d=<?=$likedis[1]?>;
         }
     }
     function SendComm(){
-       if(document.getElementById("id").innerHTML=="Войти"){
+       if(document.getElementById("cab").innerHTML=="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
         else{
-            let komm=document.getElementById("new").value;
+            let comm=document.getElementById("new").value;
             $.ajax({
                 url:'SendComm.php',
                 type:'POST',
-                data:{user:"<?=$n?>",video:<?=$code?>,komm:komm}
+                data:{user:"<?=$n?>",video:<?=$code?>,comm:comm}
                 })
         } 
     }
