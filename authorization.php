@@ -5,22 +5,19 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $conn=DBConn();
     $email=$_POST['email'];
     $password=$_POST['password'];
-    $query = "select * from users where Почта='$email' and Пароль='$password'";
+    $query = "select * from users where Почта='$email'";
     $result=$conn->query($query);
     if(!$result){
         die($conn->error);
     }
-    else{
-        $row=$result->fetch_array();
-        $name=$row['Имя_пользователя'];
-        $tel=$row['Телефон'];
-        session_start();
-        $_SESSION['name']=$row['Имя_пользователя'];
-        $_SESSION['tel']=$row['Телефон'];
-        $_SESSION['email']= $email;
-        $_SESSION['password']=$password;
-        Header("Location: main.php");
+    $row=$result->fetch_array();
+    if(!password_verify($password,$row["Пароль"])){
+        die("Введён неверный пароль");
     }
+    $name=$row['Имя_пользователя'];
+    session_start();
+    $_SESSION['name']=$row['Имя_пользователя'];
+    Header("Location: main.php");
 }
 ?>
 <html>

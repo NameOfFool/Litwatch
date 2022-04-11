@@ -1,16 +1,6 @@
 <?php
-session_start();
-$name='<a href="authorization.php">Войти</a>';
-if(isset($_SESSION['name'])) {
-    if(isset($_GET['exit'])){
-        session_destroy();
-    }
-    else {
-        $n = $_SESSION["name"];
-        $name = '<a href="cab.php">' . $n . '</a>';
-    }
-}
-include "DBConn.php";
+require_once "DBConn.php";
+GetSession($name,$link);
 $conn=DBConn();
 $query = "Select * from videos";
 $result= $conn->query($query);
@@ -42,7 +32,7 @@ $videos.="</div>";
     <nav>
         <a>Главная</a>
         <a href="#">Понравившиеся</a>
-        <?=$name?>
+        <a href="<?=$link?>"><?=$name?></a>
     </nav>
     <?=$videos?>
 </main>

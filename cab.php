@@ -1,28 +1,28 @@
 <?php
-session_start();
-$n = $_SESSION["name"];
-$name = '<a href="cab.php">'.$n.'</a>';
-$tel = $_SESSION['tel'];
-$email = $_SESSION['email'];
-$password = $_SESSION['password'];
 include "DBConn.php";
+GetSession($name,$link);
 $conn=DBConn();
 $videos="<div class='videos'>";
-$query="Select * from videos inner join users on users.Код_пользователя=videos.Код_автора where Имя_пользователя='".$n."'";
+$query="Select Название,Код_видео from videos inner join users on users.Код_пользователя=videos.Код_автора where Имя_пользователя='".$name."'";
 $result=$conn->query($query);
 if(!$result)
 {
     print_r($query);
     die($conn->error);
 }
+$row=$result->fetch_array();
+GetUser($name,$tel,$email );
 for($i=0;$i<$result->num_rows;$i++){
+    $result->data_seek(0);
     $row=$result->fetch_array();
-    $video_name=$row['Название'];
-     $code=$row['Код_видео'];
-    $videos.="<div class='video'>
-            <a href='watch.php?v=".$code."'><img src='previews/".$video_name.".jpg' alt='Стивен Кинг'></a>
-    <a href='watch.php?v=".$code."'><p>".$video_name."</p></a>
+    if(isset($row['Название'])){
+        $video_name = $row['Название'];
+        $code = $row['Код_видео'];
+        $videos .= "<div class='video'>
+            <a href='watch.php?v=" . $code . "'><img src='previews/" . $video_name . ".jpg' alt='Стивен Кинг'></a>
+    <a href='watch.php?v=" . $code . "'><p>" . $video_name . "</p></a>
         </div>";
+    }
 }
 $videos.="</div>";
 ?>
@@ -39,7 +39,7 @@ $videos.="</div>";
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-       <?=$name?>
+        <a href="<?=$link?>"><?=$name?></a>
     </nav>
     <div class="info">
     <p>Имя пользователя:<?=$name?></p>

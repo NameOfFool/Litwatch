@@ -1,32 +1,19 @@
 <?php
 include "DBConn.php";
+GetSession($name,$link);
 $conn=DBConn();
-session_start();
-$name='<a id="cab" href="authorization.php">Войти</a>';
 $code=$_GET['v'];
-if(isset($_SESSION['name'])) {
-    if(isset($_GET['exit'])){
-        session_destroy();
+$query="SELECT Оценка from video_mark where Код_оценщика=(select Код_пользователя from users where Имя_пользователя='$name') and Код_видео=$code";
+$ex=$conn->query($query);
+$color1="grey";
+$color2="grey";
+$r=$ex->fetch_array();
+if(isset($r)){
+    if($r[0]==1){
+        $color1="white";
     }
-    else {
-        $n = $_SESSION["name"];
-        $name = '<a id="cab" href="cab.php">' . $n . '</a>';
-        $tel = $_SESSION['tel'];
-        $email = $_SESSION['email'];
-        $password = $_SESSION['password'];
-        $query="SELECT Оценка from video_mark where Код_оценщика=(select Код_пользователя from users where Имя_пользователя='$n') and Код_видео=$code";
-        $ex=$conn->query($query);
-        $color1="grey";
-        $color2="grey";
-        $r=$ex->fetch_array();
-        if(isset($r)){
-            if($r[0]==1){
-                $color1="white";
-            }
-            if($r[0]==0){
-                $color2="white";
-            }
-        }
+    if($r[0]==0){
+        $color2="white";
     }
 }
 $query = "Select * from videos where Код_видео=".$code;
@@ -66,7 +53,7 @@ while($row=$commentsResult->fetch_array()){
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-        <?=$name?>
+        <a href="<?=$link?>" id="cab"><?=$name?></a>
     </nav>
     <div class="player">
     <video autoplay controls src="videos/<?=$video_name?>.mp4"></video>
@@ -129,7 +116,7 @@ document.getElementById("dis").style.color="<?=$color2?>";
         $.ajax({
             url:'Stats.php',
             type:'GET',
-            data:{x:x,exists:exists,user:"<?=$n?>",video:<?=$code?>}
+            data:{x:x,exists:exists,user:"<?=$name?>",video:<?=$code?>}
             })
         }
     }
@@ -137,14 +124,19 @@ document.getElementById("dis").style.color="<?=$color2?>";
        if(document.getElementById("cab").innerHTML=="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
-        else{
-            let comm=document.getElementById("new").value;
-            $.ajax({
-                url:'SendComm.php',
-                type:'POST',
-                data:{user:"<?=$n?>",video:<?=$code?>,comm:comm}
-                })
-        } 
+        else {
+           let comm = document.getElementById("new").value;
+           if (comm == "") {
+               alert("Пустые мысли");
+           } else {
+               $.ajax({
+                   url: 'SendComm.php',
+                   type: 'POST',
+                   data: {user: "<?=$name?>", video: <?=$code?>, comm: comm}
+               })
+               location.href = location.href;
+           }
+       }
     }
 </script>
 </html>

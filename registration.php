@@ -8,10 +8,14 @@ $tel=$_POST['tel'];
 $email=$_POST['email'];
 $password=$_POST['password'];
 $conf_password=$_POST['password_confirm'];
+if($password!=$conf_password){
+    die("Введённые пароли не совпадают");
+}
+$password=password_hash($password,PASSWORD_DEFAULT);
 $query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
 $result=$conn->query($query);
 if(!$result){
-die("insert into users values(null, '$name', '$tel', '$email','$password',0)");
+die($query);
 }
 else{
 session_start();

@@ -1,12 +1,7 @@
 <?php
-session_start();
-$n = $_SESSION["name"];
-$name = '<a href="cab.php">'.$n.'</a>';
-$tel = $_SESSION['tel'];
-$email = $_SESSION['email'];
-$password = $_SESSION['password'];
-$s = 'AddVideo.php';
 include "DBConn.php";
+GetSession($name,$link);
+$s = 'AddVideo.php';
 $conn=DBConn();
 ?>
 <html>
@@ -22,7 +17,7 @@ $conn=DBConn();
     <nav>
         <a href="main.php">Главная</a>
         <a href="#">Понравившиеся</a>
-        <?=$name?>
+        <a href="<?=$link?>"><?=$name?></a>
     </nav>
     <form method="POST" action=" <?=$s?> " enctype="multipart/form-data">
         <div class="field">
