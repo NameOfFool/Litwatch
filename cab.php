@@ -30,17 +30,17 @@ $videos.="</div>";
 <head>
     <title>Личная страница</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="VideoStyle.css">
 </head>
 <body>
 <header>
-    <img src="images/logo.png" class="logo" alt="Главная страница">
+    <nav>
+        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="#">Понравившиеся</a>
+        <a href="<?=$link?>" id="cab"><?=$name?></a>
+    </nav>
 </header>
 <main>
-    <nav>
-        <a href="main.php">Главная</a>
-        <a href="#">Понравившиеся</a>
-        <a href="<?=$link?>"><?=$name?></a>
-    </nav>
     <div class="info">
     <p>Имя пользователя:<?=$name?></p>
     <p>Телефон пользователя:<?=$tel?></p>

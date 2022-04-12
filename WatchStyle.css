@@ -4,3 +4,27 @@
     font-weight: bold;
     font-size: 15px;
 }
+.player{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.player video{
+    width: 75%;
+}
+.desc{
+    text-align: left;
+    width: 75%;
+}
+.comment_form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+textarea{
+    width:75%;
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
+    border:solid black 1px;
+    border-radius:3px;
+}

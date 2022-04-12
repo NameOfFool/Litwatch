@@ -22,18 +22,17 @@ $videos.="</div>";
     <meta charset="UTF-8">
     <title>Главная страница</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="VideoStyle.css">
 </head>
 <body>
 <header>
-    <img src="images/logo.png" class="logo" alt="Главная страница">
-
-</header>
-<main>
     <nav>
-        <a>Главная</a>
+        <a><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="#">Понравившиеся</a>
         <a href="<?=$link?>"><?=$name?></a>
     </nav>
+</header>
+<main>
     <?=$videos?>
 </main>
 <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>

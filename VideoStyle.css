@@ -1,0 +1,18 @@
+.videos{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+}
+.video{
+    text-align: center;
+    padding: 20px 0 0 20px;
+}
+.video img{
+    width:250px;
+    vertical-align: middle;
+    display:inline;
+}
+.video p{
+    width:250px;
+    margin:0 auto;
+}

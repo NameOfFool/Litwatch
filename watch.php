@@ -47,32 +47,32 @@ while($row=$commentsResult->fetch_array()){
 </head>
 <body>
 <header>
-    <img src="images/logo.png" class="logo" alt="Главная страница">
-</header>
-<main>
     <nav>
-        <a href="main.php">Главная</a>
+        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="#">Понравившиеся</a>
         <a href="<?=$link?>" id="cab"><?=$name?></a>
     </nav>
+</header>
+<main>
     <div class="player">
     <video autoplay controls src="videos/<?=$video_name?>.mp4"></video>
     <div class="desc">
         <b>Дата публикации:<?=$date?></b><br>
-<b>Описание:</b><?=$desc?><br>
+        <b>Описание:</b><?=$desc?><br>
         <button  id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     <?=$likedis[0]?></span>
         <button  id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises">  <?=$likedis[1]?></span>
     </div>
-    <div>
-        <textarea id="new" placeholder="Ваш комментарий"></textarea>
+    </div>
+    <div class="comment_form">
+        <label for="new"></label><textarea id="new" placeholder="Ваш комментарий"></textarea>
         <button onclick="SendComm()">Отправить</button>
     </div>
         <div class="comments">
             <?=$comments?>
         </div>
-</div>
+
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><a><img src="images/logo.png" alt="Главная страница"></a><span>©Все права защищены</span></footer>
 </body>
 <script type="text/javascript">
 let l=<?=$likedis[0]?>;
@@ -80,19 +80,19 @@ let d=<?=$likedis[1]?>;
 document.getElementById("like").style.color="<?=$color1?>";
 document.getElementById("dis").style.color="<?=$color2?>";
     function SendMark(x){
-        if(document.getElementById("cab").innerHTML=="Войти"){
+        if(document.getElementById("cab").innerHTML==="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
         else{
         let exists=true
         let stat=[document.getElementById("like").style.color,document.getElementById("dis").style.color]
-        if(stat[0]=="grey" && stat[1]=="grey"){
+        if(stat[0]==="grey" && stat[1]==="grey"){
             exists=false
         }
         if(x){
-            if(stat[0]!="white") {
+            if(stat[0]!=="white") {
                 l += 1
-                if (d != 0)
+                if (d !== 0)
                     d -= 1
                 stat[1] = "grey"
                 stat[0] = "white"
@@ -100,8 +100,8 @@ document.getElementById("dis").style.color="<?=$color2?>";
             
         }
         else{
-            if(stat[1]!="white") {
-                if (l != 0)
+            if(stat[1]!=="white") {
+                if (l !== 0)
                     l -= 1
                 d += 1
                 stat[1] = "white"
@@ -121,12 +121,12 @@ document.getElementById("dis").style.color="<?=$color2?>";
         }
     }
     function SendComm(){
-       if(document.getElementById("cab").innerHTML=="Войти"){
+       if(document.getElementById("cab").innerHTML==="Войти"){
             alert("Сначала необходимо авторизаваться")
         }
         else {
            let comm = document.getElementById("new").value;
-           if (comm == "") {
+           if (comm === "") {
                alert("Пустые мысли");
            } else {
                $.ajax({

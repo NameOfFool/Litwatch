@@ -27,14 +27,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     </head>
     <body>
     <header>
-        <img src="images/logo.png" class="logo" alt="Главная страница">
-    </header>
-    <main>
         <nav>
-            <a href="main.php">Главная</a>
+            <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
             <a href="#">Понравившиеся</a>
             <a>Войти</a>
         </nav>
+    </header>
+    <main>
         <form method="POST" action=" <?=$s?> " lang="en">
             <div class="field">
                 <label for="email">Почта</label>

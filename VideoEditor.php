@@ -11,14 +11,13 @@ $conn=DBConn();
 </head>
 <body>
 <header>
-    <img src="images/logo.png" class="logo" alt="Главная страница">
+    <nav>
+        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="#">Понравившиеся</a>
+        <a href="<?=$link?>" id="cab"><?=$name?></a>
+    </nav>
 </header>
 <main>
-    <nav>
-        <a href="main.php">Главная</a>
-        <a href="#">Понравившиеся</a>
-        <a href="<?=$link?>"><?=$name?></a>
-    </nav>
     <form method="POST" action=" <?=$s?> " enctype="multipart/form-data">
         <div class="field">
             <label for="video_name">Название видео</label>
