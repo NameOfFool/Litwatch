@@ -36,7 +36,7 @@ $videos.="</div>";
 <header>
     <nav>
         <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
-        <a href="#">Понравившиеся</a>
+        <a href="Liked.php">Понравившиеся</a>
         <a href="<?=$link?>" id="cab"><?=$name?></a>
     </nav>
 </header>
@@ -50,6 +50,6 @@ $videos.="</div>";
 <?=$videos?>
 </div>
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
 </html>

@@ -28,13 +28,13 @@ $videos.="</div>";
 <header>
     <nav>
         <a><img src="images/logo.png" class="logo" alt="Главная страница"></a>
-        <a href="#">Понравившиеся</a>
+        <a href="Liked.php">Понравившиеся</a>
         <a href="<?=$link?>"><?=$name?></a>
     </nav>
 </header>
 <main>
     <?=$videos?>
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
 </html>

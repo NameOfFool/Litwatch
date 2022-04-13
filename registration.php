@@ -27,18 +27,20 @@ Header("Location: main.php");
 <html>
 <head>
     <title>Авторизация</title>
-    <link rel="stylesheet" href="style.css"
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="FormStyle.css">
 </head>
 <body>
 <header>
     <nav>
         <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
-        <a href="#">Понравившиеся</a>
+        <a href="Liked.php">Понравившиеся</a>
         <a>Войти</a>
     </nav>
 </header>
 <main>
     <form method="POST" action=" <?=$s?> " lang="en">
+        <h2>Регистрация</h2>
         <div class="field">
             <label for="name">Имя Пользователя</label>
             <input type="text" name="name" required>
@@ -64,6 +66,6 @@ Header("Location: main.php");
         </div>
     </form>
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
 </html>

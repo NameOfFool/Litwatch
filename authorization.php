@@ -23,18 +23,21 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <html>
     <head>
         <title>Авторизация</title>
-        <link rel="stylesheet" href="style.css"
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="FormStyle.css">
     </head>
     <body>
     <header>
         <nav>
             <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
-            <a href="#">Понравившиеся</a>
+            <a href="Liked.php">Понравившиеся</a>
             <a>Войти</a>
+
         </nav>
     </header>
     <main>
         <form method="POST" action=" <?=$s?> " lang="en">
+            <h2>Авторизация</h2>
             <div class="field">
                 <label for="email">Почта</label>
                 <input type="email" name="email" required>
@@ -43,13 +46,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 <label for="password">Пароль</label>
                 <input type="password" name="password" required>
             </div>
-            <div class="field">
-                <label><input type="submit"></label>
-                 <input type="button" value="Регистрация" onclick="document.location.href='registration.php'">
-            </div>
+                <input type="submit" value="Войти">
+                 <label for="register">Впервые у нас?</label><input type="button" id="register" value="Регистрация" onclick="document.location.href='registration.php'">
         </form>
     </main>
-    <footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+    <footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
     </body>
 </html>
 

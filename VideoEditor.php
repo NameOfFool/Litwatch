@@ -13,8 +13,9 @@ $conn=DBConn();
 <header>
     <nav>
         <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
-        <a href="#">Понравившиеся</a>
+        <a href="Liked.php">Понравившиеся</a>
         <a href="<?=$link?>" id="cab"><?=$name?></a>
+        <link rel="stylesheet" href="FormStyle.css">
     </nav>
 </header>
 <main>
@@ -40,6 +41,6 @@ $conn=DBConn();
         </div>
     </form>
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
 </html>
