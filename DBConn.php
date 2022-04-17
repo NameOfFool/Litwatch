@@ -26,3 +26,12 @@ function GetSession(&$name,&$link){
     $name=isset($_SESSION['name'])?$_SESSION['name']:"Войти";
     $link=isset($_SESSION['name'])?"cab.php":"authorization.php";
 }
+function GetUsers(){
+    $conn=DBConn();
+    $query="SELECT Имя_пользователя,Почта from users";
+    $result=$conn->query($query);
+    if(!$result){
+        die($conn->error);
+    }
+    return $result->fetch_all();
+}

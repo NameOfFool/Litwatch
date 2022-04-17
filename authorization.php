@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 <input type="password" name="password" required>
             </div>
                 <input type="submit" value="Войти">
-                 <label for="register">Впервые у нас?</label><input type="button" id="register" value="Регистрация" onclick="document.location.href='registration.php'">
+            <label>Впервые у нас?</label><a id="register" href='registration.php'>Регистрация</a>
         </form>
     </main>
     <footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
