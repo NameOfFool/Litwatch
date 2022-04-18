@@ -1,23 +1,55 @@
 <?php
-function GetForm()
-{
-    $s = $_SERVER["PHP_SELF"];
-    echo'<html>
+$s = $_SERVER["PHP_SELF"];
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+require_once 'DBConn.php';
+    $conn=DBConn();
+$name=$_POST['name'];
+$tel=$_POST['tel'];
+$email=$_POST['email'];
+$password=$_POST['password'];
+$conf_password=$_POST['password_confirm'];
+if($password!=$conf_password){
+    die("Введённые пароли не совпадают");
+}
+$users = GetUsers();
+foreach($users as $user){
+    if(in_array($email,$user)){
+        die("Пользователь с такой почтой уже зарегистрирован!");
+    }
+    if(in_array($name,$user)){
+        die("Пользователь с таким именем уже зарегистрирован!");
+    }
+}
+$password=password_hash($password,PASSWORD_DEFAULT);
+$query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
+$result=$conn->query($query);
+if(!$result){
+die($query);
+}
+else{
+session_start();
+$_SESSION['name']=$_POST['name'];
+Header("Location: main.php");
+}
+}
+?>
+<html>
 <head>
     <title>Авторизация</title>
-    <link rel="stylesheet" href="style.css"
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="FormStyle.css">
 </head>
 <body>
 <header>
-    <img src="images/logo.png" class="logo" alt="Главная страница">
-</header>
-<main>
     <nav>
-        <a href="main.php">Главная</a>
-        <a href="#">Понравившиеся</a>
+        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="Liked.php">Понравившиеся</a>
         <a>Войти</a>
     </nav>
-    <form method="POST" action=" '.$s.' " lang="en">
+</header>
+<main>
+    <form method="POST" action=" <?=$s?> " lang="en">
+        <h2>Регистрация</h2>
         <div class="field">
             <label for="name">Имя Пользователя</label>
             <input type="text" name="name" required>
@@ -43,32 +75,6 @@ function GetForm()
         </div>
     </form>
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
-</html>';
-}
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-require_once 'DBConn.php';
-    $conn=DBConn();
-$name=$_POST['name'];
-$tel=$_POST['tel'];
-$email=$_POST['email'];
-$password=$_POST['password'];
-$conf_password=$_POST['password_confirm'];
-$query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
-$result=$conn->query($query);
-if(!$result){
-die("insert into users values(null, '$name', '$tel', '$email','$password',0)");
-}
-else{
-session_start();
-$_SESSION['name']=$_POST['name'];
-$_SESSION['tel']=$_POST['tel'];
-$_SESSION['email']= $_POST['email'];
-$_SESSION['password']=$_POST['password'];
-Header("Location: main.php");
-}
-}
-else{
-GetForm();
-}
+</html>

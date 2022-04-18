@@ -1,20 +1,6 @@
 <?php
-session_start();
-$name='<a href="authorization.php">Войти</a>';
-if(isset($_SESSION['name'])) {
-    if(isset($_GET['exit'])){
-        session_destroy();
-    }
-    else {
-        $n = $_SESSION["name"];
-        $name = '<a href="cab.php">' . $n . '</a>';
-        $tel = $_SESSION['tel'];
-        $email = $_SESSION['email'];
-        $password = $_SESSION['password'];
-
-    }
-}
-include "DBConn.php";
+require_once "DBConn.php";
+GetSession($name,$link);
 $conn=DBConn();
 $query = "Select * from videos";
 $result= $conn->query($query);
@@ -29,27 +15,26 @@ for($i=0;$i<$result->num_rows;$i++){
         </div>";
 }
 $videos.="</div>";
-echo'
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Главная страница</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="VideoStyle.css">
 </head>
 <body>
 <header>
-    <img src="images/logo.png" class="logo" alt="Главная страница">
-
+    <nav>
+        <a><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="Liked.php">Понравившиеся</a>
+        <a href="<?=$link?>"><?=$name?></a>
+    </nav>
 </header>
 <main>
-    <nav>
-        <a>Главная</a>
-        <a href="#">Понравившиеся</a>
-        '.$name.'
-    </nav>
-    '.$videos.'
+    <?=$videos?>
 </main>
-<footer><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></footer>
+<footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
-</html>';
+</html>
