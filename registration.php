@@ -25,7 +25,7 @@ $password=password_hash($password,PASSWORD_DEFAULT);
 $query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
 $result=$conn->query($query);
 if(!$result){
-throw new Exception($query);
+throw new Exception($conn->error);
 }
 else{
 session_start();
@@ -79,7 +79,7 @@ catch(Exception $e){
             <input type="password" name="password_confirm" required>
         </div>
         <div class="field">
-            <label><input type="submit"></label>
+            <label><input type="submit" value="Регистрация"></label>
         </div>
     </form>
 </main>
