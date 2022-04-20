@@ -1,8 +1,10 @@
 <?php
+try
+{
 include "DBConn.php";
 GetSession($name, $link);
 if($name==='Войти'){
-    die('Необходимо авторизоваться');
+    throw new Exception('Необходимо авторизоваться');
 }
 $conn = DBConn();
 $videos = "<div class='videos'>";
@@ -31,6 +33,13 @@ for ($i = 0; $i < $result->num_rows; $i++) {
     }
 }
 $videos .= "</div>";
+}
+catch(Exception $e){
+    session_start();
+    $_SESSION['m'] = $e->getMessage();
+    print_r($_SESSION);
+    header("Location: Error.php");
+}
 ?>
 <html>
 <head>

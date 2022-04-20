@@ -1,23 +1,34 @@
 <?php
-    $s = $_SERVER["PHP_SELF"];
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    require_once 'DBConn.php';
-    $conn=DBConn();
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    $query = "select * from users where Почта='$email'";
-    $result=$conn->query($query);
-    if(!$result){
-        die($conn->error);
+    try{
+        $s = $_SERVER["PHP_SELF"];
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        require_once 'DBConn.php';
+        $conn=DBConn();
+        $email=$_POST['email'];
+        $password=$_POST['password'];
+        $query = "select * from users where Почта='$email'";
+        $result=$conn->query($query);
+        if(!$result){
+            die($conn->error);
+        }
+        $row=$result->fetch_array();
+        if($result->num_rows==0){
+            throw new Exception("Пользователь не найден");
+        }
+        if(!password_verify($password,$row["Пароль"])){
+            throw new Exception("Введён неверный пароль");
+        }
+        $name=$row['Имя_пользователя'];
+        session_start();
+        $_SESSION['name']=$row['Имя_пользователя'];
+        Header("Location: main.php");
     }
-    $row=$result->fetch_array();
-    if(!password_verify($password,$row["Пароль"])){
-        die("Введён неверный пароль");
-    }
-    $name=$row['Имя_пользователя'];
+}
+catch(Exception $e){
     session_start();
-    $_SESSION['name']=$row['Имя_пользователя'];
-    Header("Location: main.php");
+    $_SESSION['m'] = $e->getMessage();
+    print_r($_SESSION);
+    header("Location: Error.php");
 }
 ?>
 <html>

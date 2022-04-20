@@ -5,7 +5,12 @@
 }
 .video{
     text-align: center;
-    padding: 20px 0 0 20px;
+    padding: 10px 10px 0 10px;
+    margin: 10px 10px 20px 10px;
+    border-radius: 20px
+}
+.video:hover{
+   background-color: #222222;
 }
 .video img{
     width:250px;
@@ -16,4 +21,7 @@
     width:250px;
     margin:0 auto;
     margin-top: 10px;
+}
+div.video a:hover{
+    background-color: transparent;
 }

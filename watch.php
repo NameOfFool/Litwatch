@@ -1,18 +1,4 @@
 <?php
-<<<<<<< HEAD
-session_start();
-$name='<a href="authorization.php">Войти</a>';
-if(isset($_SESSION['name'])) {
-    if(isset($_GET['exit'])){
-        session_destroy();
-    }
-    else {
-        $n = $_SESSION["name"];
-        $name = '<a href="cab.php">' . $n . '</a>';
-        $tel = $_SESSION['tel'];
-        $email = $_SESSION['email'];
-        $password = $_SESSION['password'];
-=======
 include "DBConn.php";
 GetSession($name,$link);
 $conn=DBConn();
@@ -28,19 +14,17 @@ if(isset($r)){
     }
     if($r[0]==0){
         $color2="white";
->>>>>>> ea7f07d4442777e67eb7162730bfb3ca5e8d2122
     }
 }
-require_once "DBConn.php";
-$query = "Select * from videos";
+$query = "Select * from videos where Код_видео=".$code;
 $result= $conn->query($query);
+$statQuery="select ifnull(Лайки,0)Лайки, ifnull(Дизлайки,0)Дизлайки from (SELECT (SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=1 group by `Код_видео` having Код_видео=$code )Лайки,
+(SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=0 group by `Код_видео` having Код_видео=$code)Дизлайки)t;";
 $row=$result->fetch_array();
+$stat=$conn->query($statQuery);
+$likedis=$stat->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
-<<<<<<< HEAD
-$date=$row['дата-публикации'];
-echo '<!DOCTYPE html>
-=======
 $date=$row['Дата_публикации'];
 $commentQuery="SELECT * from komments inner join Users on Код_автора=Код_пользователя";
 $commentsResult=$conn->query($commentQuery);
@@ -53,17 +37,13 @@ while($row=$commentsResult->fetch_array()){
 }
 ?>
 <!DOCTYPE html>
->>>>>>> ea7f07d4442777e67eb7162730bfb3ca5e8d2122
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title><?=$video_name?></title>
     <link rel="stylesheet" href="style.css">
-<<<<<<< HEAD
-=======
     <link rel="stylesheet" href="WatchStyle.css">
     <script src="jquery-3.6.0.js"></script>
->>>>>>> ea7f07d4442777e67eb7162730bfb3ca5e8d2122
 </head>
 <body>
 <header>
@@ -77,10 +57,6 @@ while($row=$commentsResult->fetch_array()){
     <div class="player">
     <video autoplay controls src="videos/<?=$video_name?>.mp4"></video>
     <div class="desc">
-<<<<<<< HEAD
-        <b>Дата публикации:'.$date.'</b><br>
-        '.$desc.'
-=======
         <b>Дата публикации:<?=$date?></b><br>
         <b>Описание:</b><?=$desc?><br>
         <button  id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     <?=$likedis[0]?></span>
@@ -90,18 +66,15 @@ while($row=$commentsResult->fetch_array()){
     <div class="comment_form">
         <label for="new"></label><textarea id="new" placeholder="Ваш комментарий"></textarea>
         <button onclick="SendComm()">Отправить</button>
->>>>>>> ea7f07d4442777e67eb7162730bfb3ca5e8d2122
     </div>
         <div class="comments">
             <?=$comments?>
         </div>
 
 </main>
+<footer><a><img src="images/logo.png" alt="Главная страница"></a><span>©Все права защищены</span></footer>
 <footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
-<<<<<<< HEAD
-</html>';
-=======
 <script type="text/javascript">
 let l=<?=$likedis[0]?>;
 let d=<?=$likedis[1]?>;
@@ -140,7 +113,6 @@ document.getElementById("dis").style.color="<?=$color2?>";
         document.getElementById("dises").innerHTML=d+"";
         document.getElementById("like").style.color=stat[0]
         document.getElementById("dis").style.color=stat[1]
-      //  location.href="Stats.php?x="+x+"&exists="+exists+"&user='.$n.'&video='.$code.'"
         $.ajax({
             url:'Stats.php',
             type:'GET',
@@ -168,4 +140,3 @@ document.getElementById("dis").style.color="<?=$color2?>";
     }
 </script>
 </html>
->>>>>>> ea7f07d4442777e67eb7162730bfb3ca5e8d2122

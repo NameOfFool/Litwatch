@@ -1,4 +1,5 @@
 <?php
+try{
 $s = $_SERVER["PHP_SELF"];
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 require_once 'DBConn.php';
@@ -9,28 +10,35 @@ $email=$_POST['email'];
 $password=$_POST['password'];
 $conf_password=$_POST['password_confirm'];
 if($password!=$conf_password){
-    die("Введённые пароли не совпадают");
+    throw new Exception("Введённые пароли не совпадают");
 }
 $users = GetUsers();
 foreach($users as $user){
     if(in_array($email,$user)){
-        die("Пользователь с такой почтой уже зарегистрирован!");
+        throw new Exception("Пользователь с такой почтой уже зарегистрирован!");
     }
     if(in_array($name,$user)){
-        die("Пользователь с таким именем уже зарегистрирован!");
+        throw new Exception("Пользователь с таким именем уже зарегистрирован!");
     }
 }
 $password=password_hash($password,PASSWORD_DEFAULT);
 $query = "insert into users values(null, '$name', '$tel', '$email','$password',0)";
 $result=$conn->query($query);
 if(!$result){
-die($query);
+throw new Exception($query);
 }
 else{
 session_start();
 $_SESSION['name']=$_POST['name'];
 Header("Location: main.php");
 }
+}
+}
+catch(Exception $e){
+    session_start();
+    $_SESSION['m'] = $e->getMessage();
+    print_r($_SESSION);
+    header("Location: Error.php");
 }
 ?>
 <html>
