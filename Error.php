@@ -16,7 +16,7 @@ $_SESSION['m'] = null;
 <body>
 <header>
     <nav>
-        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="Liked.php">Понравившиеся</a>
         <a href="<?=$link?>"><?=$name?></a>
     </nav>

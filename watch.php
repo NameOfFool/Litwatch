@@ -12,7 +12,7 @@ if(isset($r)){
     if($r[0]==1){
         $color1="white";
     }
-    if($r[0]==0){
+    if($r[0]==0 && isset($r[0])){
         $color2="white";
     }
 }
@@ -48,7 +48,7 @@ while($row=$commentsResult->fetch_array()){
 <body>
 <header>
     <nav>
-        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="Liked.php">Понравившиеся</a>
         <a href="<?=$link?>" id="cab"><?=$name?></a>
     </nav>
@@ -92,19 +92,30 @@ document.getElementById("dis").style.color="<?=$color2?>";
         if(x){
             if(stat[0]!=="white") {
                 l += 1
-                if (d !== 0)
+                if (stat[1]=="white")
                     d -= 1
                 stat[1] = "grey"
                 stat[0] = "white"
             }
-            
+            else{
+                l-=1
+                x="NULL"
+                stat[1] = "grey"
+                stat[0] = "grey"
+            }
         }
         else{
             if(stat[1]!=="white") {
-                if (l !== 0)
+                if (stat[0]=="white")
                     l -= 1
                 d += 1
                 stat[1] = "white"
+                stat[0] = "grey"
+            }
+            else{
+                d-=1
+                x="NULL"
+                stat[1] = "grey"
                 stat[0] = "grey"
             }
         }

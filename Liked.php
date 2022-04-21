@@ -50,7 +50,7 @@ catch(Exception $e){
 <body>
 <header>
     <nav>
-        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="Liked.php">Понравившиеся</a>
         <a href="<?= $link ?>" id="cab"><?= $name ?></a>
     </nav>

@@ -3,9 +3,12 @@ try{
 $s = $_SERVER["PHP_SELF"];
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 require_once 'DBConn.php';
-    $conn=DBConn();
+$conn=DBConn();
 $name=$_POST['name'];
 $tel=$_POST['tel'];
+if(!preg_match("/^8\d\d\d\d\d\d\d\d\d\d$/",$tel)){
+    throw new Exception("Некорректный номер телефона");
+}
 $email=$_POST['email'];
 $password=$_POST['password'];
 $conf_password=$_POST['password_confirm'];
@@ -27,11 +30,9 @@ $result=$conn->query($query);
 if(!$result){
 throw new Exception($conn->error);
 }
-else{
 session_start();
 $_SESSION['name']=$_POST['name'];
-Header("Location: main.php");
-}
+Header("Location: index.php");
 }
 }
 catch(Exception $e){
@@ -50,7 +51,7 @@ catch(Exception $e){
 <body>
 <header>
     <nav>
-        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="Liked.php">Понравившиеся</a>
         <a>Войти</a>
     </nav>
@@ -60,15 +61,15 @@ catch(Exception $e){
         <h2>Регистрация</h2>
         <div class="field">
             <label for="name">Имя Пользователя</label>
-            <input type="text" name="name" required>
+            <input type="text" name="name" required placeholder="Your_Name">
         </div>
         <div class="field">
             <label for="tel">Телефон</label>
-            <input type="tel" name="tel" required>
+            <input type="tel" name="tel" required placeholder="81234567890">
         </div>
         <div class="field">
             <label for="email">Почта</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" required placeholder="example@ex.com">
         </div>
         <div class="field">
             <label for="password">Пароль</label>

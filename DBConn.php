@@ -9,7 +9,7 @@ function DBConn(){
 }
 function GetUser($name,&$tel,&$email){
     $conn=DBConn();
-    $query="SELECT Телефон, Почта from users";
+    $query="SELECT Телефон, Почта from users where Имя_пользователя='$name'";
     $result=$conn->query($query);
     if(!$result){
         die($conn->error);

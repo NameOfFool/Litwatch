@@ -9,7 +9,7 @@
         $query = "select * from users where Почта='$email'";
         $result=$conn->query($query);
         if(!$result){
-            die($conn->error);
+            throw new Exception($conn->error);
         }
         $row=$result->fetch_array();
         if($result->num_rows==0){
@@ -21,7 +21,7 @@
         $name=$row['Имя_пользователя'];
         session_start();
         $_SESSION['name']=$row['Имя_пользователя'];
-        Header("Location: main.php");
+        Header("Location: index.php");
     }
 }
 catch(Exception $e){
@@ -40,7 +40,7 @@ catch(Exception $e){
     <body>
     <header>
         <nav>
-            <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+            <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
             <a href="Liked.php">Понравившиеся</a>
             <a>Войти</a>
 

@@ -35,7 +35,7 @@ $videos.="</div>";
 <body>
 <header>
     <nav>
-        <a href="main.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
+        <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="Liked.php">Понравившиеся</a>
         <a href="<?=$link?>" id="cab"><?=$name?></a>
     </nav>
@@ -46,7 +46,7 @@ $videos.="</div>";
     <p>Телефон пользователя:<?=$tel?></p>
     <p>Почта пользователя:<?=$email?></p>
     <button onclick="document.location.href='VideoEditor.php'">Добавить видео</button>
-    <button onclick="document.location.href='main.php?exit=true'">Выйти из аккаунта</button>
+    <button onclick="document.location.href='index.php?exit=true'">Выйти из аккаунта</button>
 <?=$videos?>
 </div>
 </main>
