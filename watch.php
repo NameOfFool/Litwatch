@@ -72,7 +72,6 @@ while($row=$commentsResult->fetch_array()){
         </div>
 
 </main>
-<footer><a><img src="images/logo.png" alt="Главная страница"></a><span>©Все права защищены</span></footer>
 <footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
 <script type="text/javascript">

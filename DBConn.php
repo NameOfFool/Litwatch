@@ -17,6 +17,7 @@ function GetUser($name,&$tel,&$email){
     $row=$result->fetch_array();
     $email=$row['Почта'];
     $tel=$row['Телефон'];
+    $conn->close();
 }
 function GetSession(&$name,&$link){
     session_start();
@@ -33,5 +34,6 @@ function GetUsers(){
     if(!$result){
         die($conn->error);
     }
+    $conn->close();
     return $result->fetch_all();
 }
