@@ -12,6 +12,7 @@ $_SESSION['m'] = null;
     <title>Ошибка</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="VideoStyle.css">
+    <link rel="shortcut icon" href="images/icon.png" type="image/png">
 </head>
 <body>
 <header>

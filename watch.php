@@ -43,6 +43,7 @@ while($row=$commentsResult->fetch_array()){
     <title><?=$video_name?></title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="WatchStyle.css">
+    <link rel="shortcut icon" href="images/icon.png" type="image/png">
     <script src="jquery-3.6.0.js"></script>
 </head>
 <body>

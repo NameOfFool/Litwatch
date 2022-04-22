@@ -51,13 +51,30 @@ footer{
 button{
     font-size: 16px;
     font-family: Roboto, sans-serif;
-    border:solid black 1px;
-    border-radius:3px;
+    border:solid black 5px;
+    border-radius:7px;
     background-color: #B3C1C6;
     color: black;
+    font-weight: bold;
+}
+button:hover{
+    color:white;
+    background-color: #a49382;
 }
 .error{
     color:#FFFFFF;
     text-shadow: #000000 1px 0 2px;
     text-align: center;
+}
+.info{
+    display:flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    width:75%;
+    margin:0 auto;
+    align-items: center;
+}
+.info button{
+    margin-bottom: 15px;
+    width:15%;
 }

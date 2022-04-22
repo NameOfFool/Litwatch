@@ -36,6 +36,7 @@ catch(Exception $e){
         <title>Авторизация</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="FormStyle.css">
+          <link rel="shortcut icon" href="images/icon.png" type="image/png">
     </head>
     <body>
     <header>

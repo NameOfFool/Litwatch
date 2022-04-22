@@ -1,6 +1,7 @@
 <?php
 include "DBConn.php";
 GetSession($name,$link);
+GetUser($name,$tel,$email);
 $conn=DBConn();
 $videos="<div class='videos'>";
 $query="Select Название,Код_видео from videos inner join users on users.Код_пользователя=videos.Код_автора where Имя_пользователя='".$name."'";
@@ -11,7 +12,6 @@ if(!$result)
     die($conn->error);
 }
 $row=$result->fetch_array();
-GetUser($name,$tel,$email );
 for($i=0;$i<$result->num_rows;$i++){
     $result->data_seek(0);
     $row=$result->fetch_array();
@@ -31,6 +31,7 @@ $videos.="</div>";
     <title>Личная страница</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="VideoStyle.css">
+     <link rel="shortcut icon" href="images/icon.png" type="image/png">
 </head>
 <body>
 <header>
@@ -47,8 +48,9 @@ $videos.="</div>";
     <p>Почта пользователя:<?=$email?></p>
     <button onclick="document.location.href='VideoEditor.php'">Добавить видео</button>
     <button onclick="document.location.href='index.php?exit=true'">Выйти из аккаунта</button>
+    </div>
+    <h2>Ваши видео:</h2>
 <?=$videos?>
-</div>
 </main>
 <footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
