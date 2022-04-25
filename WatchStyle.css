@@ -16,10 +16,25 @@
     text-align: left;
     width: 75%;
 }
+.comments{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .comment_form{
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+h1{
+    width:75%;
+}
+.comment{
+    width:75%;
+    background-color: #85796a;
+    border-radius: 5px;
+    color: #EEEEEE;
+    text-shadow: 2px 1px black;
 }
 textarea{
     width:75%;

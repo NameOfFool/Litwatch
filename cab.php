@@ -11,9 +11,8 @@ if(!$result)
     print_r($query);
     die($conn->error);
 }
-$row=$result->fetch_array();
+$result->data_seek(0);
 for($i=0;$i<$result->num_rows;$i++){
-    $result->data_seek(0);
     $row=$result->fetch_array();
     if(isset($row['Название'])){
         $video_name = $row['Название'];

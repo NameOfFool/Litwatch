@@ -26,7 +26,7 @@ $likedis=$stat->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
 $date=$row['Дата_публикации'];
-$commentQuery="SELECT * from komments inner join Users on Код_автора=Код_пользователя";
+$commentQuery="SELECT * from komments inner join Users on Код_автора=Код_пользователя where Код_видео=$code";
 $commentsResult=$conn->query($commentQuery);
 $comments="";
 while($row=$commentsResult->fetch_array()){
@@ -69,6 +69,7 @@ while($row=$commentsResult->fetch_array()){
         <button onclick="SendComm()">Отправить</button>
     </div>
         <div class="comments">
+            <h1>Комментарии:</h1>
             <?=$comments?>
         </div>
 
