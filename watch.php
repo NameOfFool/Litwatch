@@ -16,7 +16,7 @@ if(isset($r)){
         $color2="white";
     }
 }
-$query = "Select * from videos where Код_видео=".$code;
+$query = "SELECT * from videos where Код_видео=".$code;
 $result= $conn->query($query);
 $statQuery="select ifnull(Лайки,0)Лайки, ifnull(Дизлайки,0)Дизлайки from (SELECT (SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=1 group by `Код_видео` having Код_видео=$code )Лайки,
 (SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=0 group by `Код_видео` having Код_видео=$code)Дизлайки)t;";
@@ -25,7 +25,7 @@ $stat=$conn->query($statQuery);
 $likedis=$stat->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
-$date=$row['Дата_публикации'];
+$date=date("d.m.Y",strtotime($row['Дата_публикации']));
 $commentQuery="SELECT * from komments inner join Users on Код_автора=Код_пользователя where Код_видео=$code";
 $commentsResult=$conn->query($commentQuery);
 $comments="";
@@ -60,8 +60,8 @@ while($row=$commentsResult->fetch_array()){
     <div class="desc">
         <b>Дата публикации:<?=$date?></b><br>
         <b>Описание:</b><?=$desc?><br>
-        <button  id="like" onclick="SendMark(true)">Нравится</button><span id="likes">     <?=$likedis[0]?></span>
-        <button  id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises">  <?=$likedis[1]?></span>
+        <button  id="like" onclick="SendMark(true)">Нравится</button><span id="likes"><?=$likedis[0]?></span>
+        <button  id="dis" onclick="SendMark(false)">Не нравится</button><span id="dises"><?=$likedis[1]?></span>
     </div>
     </div>
     <div class="comment_form">

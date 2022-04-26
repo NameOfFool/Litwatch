@@ -4,6 +4,10 @@
     font-weight: bold;
     font-size: 15px;
 }
+span{
+    color: black;
+    font-weight: bold;
+}
 .player{
     display: flex;
     align-items: center;
