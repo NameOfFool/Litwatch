@@ -1,7 +1,6 @@
 <?php
 include "DBConn.php";
 $conn=DBConn();
-$exists=$_GET['exists']=='true';
 $x='NULL';
 if($_GET['x']=='true'){
     $x=1;

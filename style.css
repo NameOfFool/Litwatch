@@ -5,13 +5,9 @@ body{
     font-weight: 550;
     color: #111111;
     min-height: 100vh;
-    display: grid;
+    display: flex;
+    flex-flow: column wrap;
     vertical-align: middle;
-    grid-template-areas:
-            "header"
-            "main"
-            "footer";
-    grid-template-rows: 6% 88% 6%;
 }
 *{
     padding: 0;
@@ -29,11 +25,11 @@ a:hover{
     background-color: #222222;
 }
 header{
-    grid-area: header;
+    flex:1;
     background-color: #a49382;
-    padding: 20px;
+    padding: 10px;
     display: flex;
-    align-content: space-around;
+    align-content: center;
     opacity: 75%;
 }
 nav{
@@ -43,10 +39,16 @@ nav{
     width:100%;
     align-items: center;
 }
+main{
+    flex:98;
+}
 footer{
-    grid-area: footer;
+    flex:1;
     background-color: #a49382;
-    padding: 20px;
+    display: flex;
+    align-content: center;
+    padding: 10px;
+    opacity: 75%;
 }
 button{
     font-size: 16px;

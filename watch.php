@@ -18,15 +18,26 @@ if(isset($r)){
 }
 $query = "SELECT * from videos where Код_видео=".$code;
 $result= $conn->query($query);
-$statQuery="select ifnull(Лайки,0)Лайки, ifnull(Дизлайки,0)Дизлайки from (SELECT (SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=1 group by `Код_видео` having Код_видео=$code )Лайки,
-(SELECT count(Код_видео) FROM `video_mark` WHERE Оценка=0 group by `Код_видео` having Код_видео=$code)Дизлайки)t;";
 $row=$result->fetch_array();
-$stat=$conn->query($statQuery);
-$likedis=$stat->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
 $date=date("d.m.Y",strtotime($row['Дата_публикации']));
-$commentQuery="SELECT * from komments inner join Users on Код_автора=Код_пользователя where Код_видео=$code";
+$statQuery="select ifnull(Лайки,0)Лайки, ifnull(Дизлайки,0)Дизлайки 
+from 
+     (SELECT 
+             (SELECT count(Код_видео)
+             FROM `video_mark`
+             WHERE Оценка=1
+             group by `Код_видео`
+             having Код_видео=$code )Лайки,
+             (SELECT count(Код_видео) 
+             FROM `video_mark`
+             WHERE Оценка=0
+             group by `Код_видео`
+             having Код_видео=$code)Дизлайки)t;";
+$stat=$conn->query($statQuery);
+$likedis=$stat->fetch_array();
+$commentQuery="SELECT * from comments inner join Users on Код_автора=Код_пользователя where Код_видео=$code";
 $commentsResult=$conn->query($commentQuery);
 $comments="";
 while($row=$commentsResult->fetch_array()){
@@ -128,7 +139,7 @@ document.getElementById("dis").style.color="<?=$color2?>";
         $.ajax({
             url:'Stats.php',
             type:'GET',
-            data:{x:x,exists:exists,user:"<?=$name?>",video:<?=$code?>}
+            data:{x:x,user:"<?=$name?>",video:<?=$code?>}
             })
         }
     }
@@ -146,7 +157,9 @@ document.getElementById("dis").style.color="<?=$color2?>";
                    type: 'POST',
                    data: {user: "<?=$name?>", video: <?=$code?>, comm: comm}
                })
-               location.href = location.href;
+               setTimeout(function(){
+                   location.reload();
+               }, 2000);
            }
        }
     }
