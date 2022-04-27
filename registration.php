@@ -54,7 +54,7 @@ catch(Exception $e){
     <nav>
         <a href="index.php"><img src="images/logo.png" class="logo" alt="Главная страница"></a>
         <a href="Liked.php">Понравившиеся</a>
-        <a>Войти</a>
+        <a href="authorization.php">Войти</a>
     </nav>
 </header>
 <main>
@@ -81,7 +81,7 @@ catch(Exception $e){
             <input type="password" name="password_confirm" required>
         </div>
         <div class="field">
-            <label><input type="submit" value="Регистрация"></label>
+            <label><input type="submit"  value="Регистрация"></label>
         </div>
     </form>
 </main>

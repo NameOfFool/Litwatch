@@ -18,6 +18,9 @@ if(isset($r)){
 }
 $query = "SELECT * from videos where Код_видео=".$code;
 $result= $conn->query($query);
+if(!$result){
+    die($conn->error());
+}
 $row=$result->fetch_array();
 $video_name=$row['Название'];
 $desc=$row['Описание'];
@@ -83,7 +86,6 @@ while($row=$commentsResult->fetch_array()){
             <h1>Комментарии:</h1>
             <?=$comments?>
         </div>
-
 </main>
 <footer><nav><img src="images/logo.png" alt="Главная страница"><span>©Все права защищены</span></nav></footer>
 </body>
